@@ -1,0 +1,17 @@
+quixstreams
+python-dotenv
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+scipy
+bcrypt
+marimo
+python-lsp-server
+ipython
+plotly
+fastapi
+uvicorn
+pydantic_ai
+anthropic

@@ -1,0 +1,49 @@
+# Quix Project Descriptor
+# This file describes the data pipeline and configuration of resources of a Quix Project.
+
+metadata:
+  version: 1.0
+
+# This section describes the Deployments of the data pipeline
+deployments:
+  - name: Marimo
+    application: marimo
+    version: latest
+    deploymentType: Service
+    resources:
+      cpu: 500
+      memory: 2000
+      replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: marimo
+    state:
+      enabled: true
+      size: 1
+    network:
+      ports:
+        - port: 80
+          targetPort: 8080
+    variables:
+      - name: MARIMO_MODE
+        inputType: FreeText
+        description: "Mode to run Marimo in: 'run' (read-only notebook), 'edit' (editable notebook), 'browser' (file browser)"
+        value: edit
+      - name: MARIMO_NOTEBOOK
+        inputType: FreeText
+        description: The notebook file to open (e.g., main.py)
+        value: main.py
+      - name: ANTHROPIC_API_KEY
+        inputType: Secret
+        description: Token generated from https://platform.claude.com/settings/keys.
+        secretKey: anthropic_api_key
+    plugin:
+      embeddedView:
+        enabled: true
+        hideHeader: true
+        default: true
+      sidebarItem:
+        show: true
+        icon: note_alt
+        badge: BETA
+

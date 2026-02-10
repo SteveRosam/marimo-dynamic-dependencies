@@ -17,6 +17,9 @@ deployments:
     publicAccess:
       enabled: true
       urlPrefix: marimo
+    state:
+      enabled: true
+      size: 1
     network:
       ports:
         - port: 80

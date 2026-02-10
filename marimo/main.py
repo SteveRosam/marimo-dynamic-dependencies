@@ -13,7 +13,24 @@ app = marimo.App(width="full")
 def _():
     import os
     import marimo as mo
-    return mo, os
+    import numpy as np
+    import plotly.express as px
+    return mo, np, os, px
+
+
+@app.cell
+def _(mo, np, px):
+    # Generate sine wave data
+    x = np.linspace(0, 4 * np.pi, 200)
+    y = np.sin(x)
+
+    # Create the plot
+    fig = px.line(x=x, y=y, title="Sine Wave", labels={"x": "x", "y": "sin(x)"})
+    fig.update_layout(template="plotly_dark")
+
+    mo.md("## Sine Wave Demo")
+    mo.ui.plotly(fig)
+    return
 
 
 @app.cell

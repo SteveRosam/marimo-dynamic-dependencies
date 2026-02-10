@@ -30,6 +30,9 @@ COPY main.py /app/main.py
 COPY icon.png /app/icon.gif
 COPY requirements.txt /app/
 
+# Install requirements at build time for fast startup
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
 # Expose port
 EXPOSE 8080
 
@@ -113,25 +116,16 @@ RUN printf '#!/bin/bash\n\
 set -e\n\
 \n\
 VENV_DIR="/app/state/venv"\n\
-REQUIREMENTS="/app/requirements.txt"\n\
 \n\
-# Create venv in state directory for package persistence\n\
+# Create venv with system-site-packages to inherit build-time installed packages\n\
+# Runtime-installed packages go into the venv and persist across restarts\n\
 if [ ! -d "$VENV_DIR" ]; then\n\
     echo "Creating virtual environment in $VENV_DIR..."\n\
-    python -m venv "$VENV_DIR"\n\
-    source "$VENV_DIR/bin/activate"\n\
-    # Install requirements if present\n\
-    if [ -f "$REQUIREMENTS" ]; then\n\
-        pip install --no-cache-dir -r "$REQUIREMENTS"\n\
-    fi\n\
-else\n\
-    echo "Using existing virtual environment from $VENV_DIR"\n\
-    source "$VENV_DIR/bin/activate"\n\
-    # Sync any new requirements\n\
-    if [ -f "$REQUIREMENTS" ]; then\n\
-        pip install --no-cache-dir -r "$REQUIREMENTS" 2>/dev/null || true\n\
-    fi\n\
+    python -m venv --system-site-packages "$VENV_DIR"\n\
 fi\n\
+\n\
+echo "Activating virtual environment from $VENV_DIR"\n\
+source "$VENV_DIR/bin/activate"\n\
 \n\
 # Run marimo with CORS enabled for embedding\n\
 if [ "$MARIMO_MODE" = "browser" ]; then\n\

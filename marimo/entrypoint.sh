@@ -23,5 +23,5 @@ fi
 # Run marimo with the configured mode and notebook
 exec marimo "${MARIMO_MODE:-edit}" "/app/${MARIMO_NOTEBOOK:-main.py}" \
     --host 0.0.0.0 \
-    --port 8080 \
+    --port 80 \
     --no-token

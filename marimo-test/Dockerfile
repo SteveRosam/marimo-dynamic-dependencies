@@ -30,11 +30,6 @@ COPY main.py /app/main.py
 COPY icon.png /app/icon.gif
 COPY requirements.txt /app/
 
-# Create a venv template at build time with all requirements installed
-# This gets copied to state directory at runtime for fast startup
-RUN python -m venv /app/venv-template && \
-    /app/venv-template/bin/pip install --no-cache-dir -r /app/requirements.txt
-
 # Expose port
 EXPOSE 8080
 
@@ -118,17 +113,21 @@ RUN printf '#!/bin/bash\n\
 set -e\n\
 \n\
 VENV_DIR="/app/state/venv"\n\
-VENV_TEMPLATE="/app/venv-template"\n\
+REQUIREMENTS="/app/requirements.txt"\n\
 \n\
-# Copy venv template to state directory if not exists (fast startup)\n\
-# Runtime-installed packages persist in the state venv\n\
+# Create venv in state directory for package persistence\n\
+# First startup is slow (creates venv + installs packages)\n\
+# Subsequent startups are fast (venv already exists)\n\
 if [ ! -d "$VENV_DIR" ]; then\n\
-    echo "Copying venv template to $VENV_DIR..."\n\
-    cp -r "$VENV_TEMPLATE" "$VENV_DIR"\n\
+    echo "Creating virtual environment in $VENV_DIR..."\n\
+    python -m venv "$VENV_DIR"\n\
+    source "$VENV_DIR/bin/activate"\n\
+    echo "Installing requirements..."\n\
+    pip install -r "$REQUIREMENTS"\n\
+else\n\
+    echo "Using existing virtual environment from $VENV_DIR"\n\
+    source "$VENV_DIR/bin/activate"\n\
 fi\n\
-\n\
-echo "Activating virtual environment from $VENV_DIR"\n\
-source "$VENV_DIR/bin/activate"\n\
 \n\
 # Run marimo with CORS enabled for embedding\n\
 if [ "$MARIMO_MODE" = "browser" ]; then\n\

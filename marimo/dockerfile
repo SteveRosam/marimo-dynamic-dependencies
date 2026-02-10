@@ -1,13 +1,8 @@
-FROM ghcr.io/quixio/marimo-base:e6f3041
+FROM ghcr.io/quixio/marimo-base:latest
 
 # Copy application files
 COPY main.py /app/main.py
 COPY icon.png /app/icon.gif
 COPY requirements.txt /app/
-COPY entrypoint.sh /app/entrypoint.sh
 
-# Fix line endings (Windows CRLF -> Unix LF) and make executable
-RUN sed -i 's/\r$//' /app/entrypoint.sh && chmod +x /app/entrypoint.sh
-
-# Use our custom entrypoint instead of base image's
-ENTRYPOINT ["/app/entrypoint.sh"]
+# Base image handles venv creation, package installation, and marimo startup

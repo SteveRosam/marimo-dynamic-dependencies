@@ -50,5 +50,14 @@ def _(mo):
     return
 
 
+@app.cell
+def _(mo):
+    import emoji
+
+    mo.md(emoji.emojize(":rocket: Package installed at runtime! :sparkles:"))
+
+    return
+
+
 if __name__ == "__main__":
     app.run()

@@ -46,7 +46,6 @@ def _(mo):
 
     text = pyfiglet.figlet_format("Hello Quix!")
     mo.md(f"```\n{text}```")
-
     return
 
 
@@ -55,6 +54,15 @@ def _(mo):
     import emoji
 
     mo.md(emoji.emojize(":rocket: Package installed at runtime! :sparkles:"))
+    return
+
+
+@app.cell
+def _(mo):
+    from art import text2art
+
+    banner = text2art("Quix", font="block")
+    mo.md(f"```\n{banner}\n```")
 
     return
 

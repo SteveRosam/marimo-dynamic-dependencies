@@ -63,6 +63,15 @@ def _(mo):
 
     banner = text2art("Quix", font="block")
     mo.md(f"```\n{banner}\n```")
+    return
+
+
+@app.cell
+def _(mo):
+    import cowsay
+
+    message = cowsay.get_output_string("cow", "Installed at runtime!")
+    mo.md(f"```\n{message}\n```")
 
     return
 

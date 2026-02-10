@@ -19,7 +19,7 @@ deployments:
       urlPrefix: marimo
     state:
       enabled: true
-      size: 1
+      size: 10
     network:
       ports:
         - port: 80
@@ -45,8 +45,8 @@ deployments:
       sidebarItem:
         show: true
         icon: note_alt
+        order: 0
         badge: BETA
-
   - name: Marimo Test
     application: marimo-test
     version: latest

@@ -23,7 +23,7 @@ deployments:
     network:
       ports:
         - port: 80
-          targetPort: 8080
+          targetPort: 80
     variables:
       - name: MARIMO_MODE
         inputType: FreeText

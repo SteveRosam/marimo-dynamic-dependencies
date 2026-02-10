@@ -40,5 +40,15 @@ def _():
     return
 
 
+@app.cell
+def _(mo):
+    import pyfiglet
+
+    text = pyfiglet.figlet_format("Hello Quix!")
+    mo.md(f"```\n{text}```")
+
+    return
+
+
 if __name__ == "__main__":
     app.run()

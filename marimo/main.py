@@ -5,7 +5,7 @@
 
 import marimo
 
-__generated_with = "0.16.4"
+__generated_with = "0.19.9"
 app = marimo.App(width="full")
 
 
@@ -15,7 +15,8 @@ def _():
     import marimo as mo
     import numpy as np
     import plotly.express as px
-    return mo, np, os, px
+
+    return mo, np, px
 
 
 @app.cell
@@ -32,6 +33,11 @@ def _(mo, np, px):
     mo.ui.plotly(fig)
     return
 
+
+@app.cell
+def _():
+    #jibber Jabber
+    return
 
 
 if __name__ == "__main__":

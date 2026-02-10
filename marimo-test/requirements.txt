@@ -14,7 +14,3 @@ fastapi
 uvicorn
 pydantic_ai
 anthropic
-plotly
-pyfiglet
-emoji
-art

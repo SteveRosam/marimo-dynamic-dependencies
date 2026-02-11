@@ -1,4 +1,4 @@
-FROM ghcr.io/quixio/marimo-base:d2e1e92
+FROM ghcr.io/quixio/marimo-base:2c30764
 
 # Copy application files
 COPY main.py /app/main.py

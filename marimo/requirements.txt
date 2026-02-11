@@ -1,4 +1,4 @@
 marimo
 numpy
 plotly
-quixlake
+quixlake-sdk

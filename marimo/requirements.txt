@@ -1,3 +1,4 @@
 marimo
 numpy
 plotly
+quixlake

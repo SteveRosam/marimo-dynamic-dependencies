@@ -23,7 +23,7 @@ def _():
 def _(mo):
     import cowsay
 
-    message = cowsay.get_output_string("cow", "Installed at runtime!")
+    message = cowsay.get_output_string("cow", "MOO!")
     mo.md(f"```\n{message}\n```")
     return
 
@@ -31,7 +31,7 @@ def _(mo):
 @app.cell
 def _():
     #jksdfh jksdfhj sdhjk f
-    # asdasdasd
+    # asdasdasd aaaa
     return
 
 

@@ -15,6 +15,7 @@ def _():
     import marimo as mo
     import numpy as np
     import plotly.express as px
+    import quixlake
 
     return (mo,)
 

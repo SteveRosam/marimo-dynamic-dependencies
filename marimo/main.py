@@ -5,7 +5,7 @@
 
 import marimo
 
-__generated_with = "0.19.10"
+__generated_with = "0.19.11"
 app = marimo.App(width="full")
 
 
@@ -32,13 +32,7 @@ def _(mo):
 @app.cell
 def _():
     #jksdfh jksdfhj sdhjk f
-    # asdasdasd aaaa
-    return
-
-
-@app.cell
-def _():
-    #sdklfhksdhfjk sd
+    # asdasdasd aaaa gfh fgh fg
     return
 
 
